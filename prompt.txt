@@ -1,0 +1,374 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Demo: Code Completions & Suggestions in Python with GitHub Copilot
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Create a Python File
+
+Open VS Code → create a new file: copilot_demo1.py
+
+Start with a Function Docstring
+
+# copilot_demo.py
+
+    def fibonacci(n: int) -> int:
+        """
+        Calculate the nth Fibonacci number.
+        """
+
+👉 Pause here.
+Copilot will automatically suggest the function body. You’ll likely see a completion like:
+
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+---
+
+
+3. Trigger Inline Completion: Type a comment and let Copilot generate code:
+
+
+    # generate a list of first 10 fibonacci numbers
+
+
+👉 Copilot will complete it, for example:
+
+    fib_list = [fibonacci(i) for i in range(10)]
+    print(fib_list)
+
+
+
+------------------------------------------
+
+Demonstrate Multi-Line Completions
+copilot_demo2.py
+
+
+Add a comment to generate a simple class:
+
+# Create a class to represent a bank account
+
+# Example usage or demo usage
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++
+Demo: GitHub Copilot Chat Modes in VS Code
+++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Ask Mode (Q&A and Suggestions)
+-------------------------------
+
+👉 Goal: Show how to query Copilot Chat for explanations or examples.
+
+Step 1:
+Open the Copilot Chat panel and type:
+
+/ask Explain how to write a function in java that checks if a number is prime
+
+
+
+Step 2: Demo Enhancement
+
+/ask Can you optimize it for performance?
+
+
+
+
+
+2. ✏️ Edit Mode (Inline Code Modification)
+-------------------------------------------
+
+👉 Goal: Show Copilot editing existing code directly in your file.
+
+Step 1:
+
+in demo.java paste this function:
+
+def fibonacci(n: int) -> int:
+    return n  # temporary placeholder
+    
+Highlight the function, then run in chat:
+
+/edit Rewrite this function to return the nth Fibonacci number using recursion
+
+
+Copilot Action:
+
+Directly updates the code in the editor with recursive logic.
+
+
+Step 2 (Improvement):
+
+/edit Change this function to use an iterative approach instead of recursion
+
+
+
+
+3. 🤖 Agent Mode (Task Execution)
+----------------------------------
+
+👉 Goal: Show Copilot executing larger, multi-step tasks.
+
+Step 1:
+In chat, type:
+
+
+/agent Create a new Python file that defines a BankAccount class with deposit and withdraw methods, then add a small demo usage
+
+
+Step 2 (Extend Task):
+/agent Add unit tests for the BankAccount class in a new test file using pytest
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++
+Demo: Prompt Engineering with GitHub Copilot
++++++++++++++++++++++++++++++++++++++++++++++++
+
+🎯 Objective
+
+Show how different types of prompts lead to different completions with Copilot. 
+Focus on CRUD generation, design patterns, debugging, and small project scaffolding.
+
+
+1. Generate CRUD Functions (Comment-Driven Prompting)
+
+Step: In a new file crud_demo.py, type:
+
+# generate CRUD functions for a User model with id, name, email
+
+
+
+
+2. 🏗 Prompt for a Design Pattern (Singleton Example)
+
+Step: In a file singleton_demo.py, type:
+
+# implement a singleton class for database connection in Python
+
+
+
+
+3. 🐞 "Fix This Bug" Style Prompts
+
+Step: Paste buggy code in buggy_code.py:
+
+def divide(a, b):
+    return a / b
+
+
+/edit /fix this function so it handles division by zero gracefully
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+emo: Zero-shot, One-shot, and Few-shot Prompting with GitHub Copilot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+1. 🟢 Zero-shot Prompting
+
+👉 Give only the task — no examples.
+
+Prompt (comment in file):
+
+// Write a function that formats a user's profile information into a readable string
+
+
+Here, Copilot guesses what “format” means — the result is correct but generic.
+
+
+2. 🟡 One-shot Prompting
+
+👉 Provide one example to set the style or structure.
+
+Prompt:
+
+// Example:
+// Input: { name: "Alice", age: 30, city: "Paris" }
+// Output: "Alice (30) - City: Paris"
+// Now write a function that follows the same format.
+
+
+With just one example, Copilot understands the desired output style and follows it exactly.
+
+
+
+3. 🔵 Few-shot Prompting
+
+👉 Provide multiple examples to lock in the style and ensure consistency.
+
+Prompt:
+
+// Examples:
+// Input: { name: "Alice", age: 30, city: "Paris" }
+// Output: "Alice (30) - City: Paris"
+// Input: { name: "Bob", age: 25, city: "Berlin" }
+// Output: "Bob (25) - City: Berlin"
+// Input: { name: "Charlie", age: 40, city: "London" }
+// Output: "Charlie (40) - City: London"
+// Write a function that formats any user's profile following the same pattern.
+
+
+Multiple examples help Copilot infer structure, tone, and formatting rules with high precision.
+
+
+-------------------------------------------------------------------------
+Demo 2: Zero-shot vs One-shot vs Few-shot Prompting (Backend API Example)
+
+We’ll build an Express API route for managing tasks.
+
+1. 🟢 Zero-shot Prompting
+👉 No examples, just an instruction.
+Prompt (as comment in server.js):
+
+// Create an Express route to manage tasks
+
+Copilot generates a generic route with minimal functionality — good start but not complete.
+
+
+2. 🟡 One-shot Prompting
+👉 Provide one example of desired behavior/output.
+Prompt:
+
+// Example:
+// GET /tasks should return: [{ id: 1, title: "Sample Task", completed: false }]
+// Now add routes to support GET, POST, PUT, and DELETE for tasks.
+
+
+3. 🔵 Few-shot Prompting
+👉 Provide multiple examples with expected outputs for consistency and detail.
+Prompt:
+
+// Examples:
+// GET /tasks → returns all tasks as JSON
+// POST /tasks with { "title": "Learn Copilot" } → creates { id: 1, title: "Learn Copilot", completed: false }
+// PUT /tasks/1 with { "completed": true } → updates task 1 to { id: 1, title: "Learn Copilot", completed: true }
+// DELETE /tasks/1 → removes task 1 and returns 204
+// Implement these routes in Express using an in-memory tasks array
+
+
+✅Takeaways for Participants
+Zero-shot: Minimal skeleton, Copilot “guesses”
+One-shot: Clear CRUD routes with proper behavior
+Few-shot: More robust, consistent API with defaults + error handling
+
+
+#######################################################
+⚡ Challenge: Generate a Small API Service
+
+Step: In api_service.py, type a descriptive prompt:
+
+# build a small Flask API service with endpoints to manage books
+# should support GET /books, POST /books, PUT /books/<id>, DELETE /books/<id>
+
+
+Example of descriptive prompt:
+
+Build a small Flask REST API service for managing a collection of books.
+Requirements:
+1. Use Flask as the web framework.
+2. Define a simple in-memory data store (e.g., a list of dictionaries) to hold books.
+3. Each book should have the fields: id (int), title (string), author (string), and year (int).
+4. Implement CRUD endpoints:
+   - GET /books → return a list of all books in JSON format.
+   - POST /books → add a new book with the provided JSON payload.
+   - PUT /books/<id> → update an existing book by its id.
+   - DELETE /books/<id> → delete a book by its id.
+5. Handle error cases, such as updating or deleting a book that does not exist.
+6. Return proper HTTP status codes (201 for creation, 200 for success, 404 for not found, etc.).
+7. Add a simple __main__ section to run the app with debug mode enabled.
+
+#######################################################
+
+Test the api
+------------
+
+It require rest extention to be installed on VS code
+install flask (pip install flask)
+
+
+Create a new file apicall.rest 
+add api_service.py in chat context
+
+/edit mode
+
+call api on endpoint http://127.0.0.1:5000
+write api call for all operation
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Demo: Insecure Code Review with GitHub Copilot
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Create an Insecure Example (Node.js + Express)
+
+insecure_app.js
+
+const express = require("express");
+const mysql = require("mysql");
+const app = express();
+
+app.use(express.json());
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "password123", // hardcoded secret
+  database: "demo"
+});
+
+// Insecure login endpoint
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  
+  // 🚨 Vulnerable: SQL Injection possible
+  const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+  
+  connection.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).send("Database error");
+    }
+    if (results.length > 0) {
+      res.send("Login successful!");
+    } else {
+      res.status(401).send("Invalid credentials");
+    }
+  });
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
+
+
+2. Ask Copilot to Review the Code
+
+In Copilot Chat, select the file and type:
+
+/ask Review this code for security risks and suggest improvements
+
+
+Step 3: Observe Copilot Response 
+
+Step 4. Ask for a Secure Rewrite
+
+Prompt Copilot:
+
+/edit Rewrite this login endpoint to prevent SQL injection and secure password handling
+
+
+✅ Key Takeaway for Audience
+Risky patterns: Hardcoded secrets, SQL injection, plaintext passwords.
+Copilot’s role: Acts like a code reviewer, flags insecure practices, and suggests secure alternatives.
+Developer’s responsibility: Validate suggestions, apply fixes thoughtfully.

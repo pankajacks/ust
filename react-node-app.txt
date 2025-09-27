@@ -1,0 +1,75 @@
+Note-taking-app
+------------------
+
+
+Backend:
+
+Prompt for GitHub Copilot:
+
+/agent
+
+Create a Node.js backend API using Express.js that follows the MVC design pattern.
+Use a local JSON file (data/notes.json) as storage instead of a database.
+Implement models, controllers, and routes for handling CRUD operations on notes.
+Each note should have id, title, content, createdAt, and updatedAt.
+The controller should interact with the model, and the model should handle reading/writing from the JSON file.
+Include proper error handling and return responses in JSON format.
+Use a Repository pattern inside the model to abstract file operations.
+
+Folder structure should look like:
+note-taking-app/
+data/notes.json
+models/noteModel.js
+controllers/noteController.js
+routes/noteRoutes.js
+app.js
+package.json
+
+
+
+Frontend
+---------
+Create a simple React app using Vite that connects to my backend note-taking API (http://localhost:3000/api/notes).
+Use useState and useEffect hooks.
+Fetch all notes and display them in a list.
+Add a form to create a new note with title and content.
+Use axios for API calls.
+Run with npm run dev.
+
+organize the project as
+
+src/
+-api/
+-components/ 
+    - Footer # show copyrite and app information
+    - NavBar # navigation for home, crate, list note
+    - NoteList # List all the notes
+    - NoteForm # a noteform
+    - NoteItem # display a single note title, content, created and modify time in table
+-pages/
+    -CreateNote
+    -Home
+-context/
+    -NoteContext create a context and make api call
+    
+api response format when success
+{
+"success": true,
+"data": {
+"id": "1758952465364",
+"title": "Deleted Note",
+"content": "This note has been deleted.",
+"createdAt": "2025-09-27T05:54:25.364Z",
+"updatedAt": "2025-09-27T05:54:25.364Z"
+},
+"message": "Note deleted successfully"
+}
+
+when error
+{
+"success": false,
+"message": "Note not found",
+"error": "Note not found"
+}
+
+make the changes
